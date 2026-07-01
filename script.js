@@ -1,7 +1,5 @@
-// Replace this with your actual Google Apps Script Web App URL from deployment
 const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw5EXghNxkPNNJpUWPdv5GiYtLmPnMMFWajVkwZXcUlufm_lCsAjsi18_ZDnWrvjJoQIA/exec';
 
-// --- Hero Image Slider Functionality ---
 const slides = document.querySelectorAll('.hero-slider .slide');
 let currentSlideIndex = 0;
 
@@ -12,13 +10,11 @@ function rotateSlides() {
 }
 setInterval(rotateSlides, 4000); 
 
-// --- Reset Handler: Instantly clears dashboard meters ---
 document.getElementById('bmiForm').addEventListener('reset', function () {
     document.getElementById('meterDisplay').classList.add('hidden');
     document.getElementById('meterPrompt').classList.remove('hidden');
 });
 
-// --- Form Submission Handling ---
 document.getElementById('bmiForm').addEventListener('submit', function (e) {
     e.preventDefault();
 
@@ -103,7 +99,6 @@ document.getElementById('bmiForm').addEventListener('submit', function (e) {
     
     renderGaugeDisplay(name, bmi, category, message, color, pointerPercentage);
     
-    // Payload keys match your Apps Script data points exactly
     syncWithDatabase({ name, age, sex, weight, heightCm, bmi, category });
 });
 
@@ -126,7 +121,6 @@ function renderGaugeDisplay(name, bmi, category, message, color, percentage) {
     pointer.style.left = `${percentage}%`;
 }
 
-// Integrated and optimized live database upload function
 function syncWithDatabase(payload) {
     const statusAlert = document.getElementById('statusAlert');
     const btn = document.getElementById('submitBtn');
@@ -134,7 +128,6 @@ function syncWithDatabase(payload) {
     btn.disabled = true;
     btn.innerHTML = `<span>Syncing...</span>`;
 
-    // Using 'no-cors' allows submission safely across origins without strict CORS blocks
     fetch(APPS_SCRIPT_URL, {
         method: 'POST',
         mode: 'no-cors',
