@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Self-Check Kiosk</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <header class="main-header">
+        <h1>BMWhy<span class="brand-dot">.</span></h1>
+        <p>Health Self-Check Kiosk &bull; A calm, private space to evaluate your wellness journey.</p>
+    </header>
+
+    <main class="page-wrapper">
+        <!-- Responsive Fluid Hero Section -->
+        <section class="hero-canvas">
+            <div class="hero-slider">
+                <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=1200&q=80');"></div>
+                <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80');"></div>
+                <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=1200&q=80');"></div>
+            </div>
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <h2>Understanding Your Core Metrics</h2>
+                <p>Body Mass Index (BMI) offers a quick, non-invasive glimpse into how your body weight correlates with your height. Use this kiosk as a supportive, private baseline tool to step toward an informed wellness direction.</p>
+            </div>
+        </section>
+
+        <!-- Main Interactive Console Container -->
+        <section class="kiosk-container">
+            <section class="form-panel">
+                <div class="panel-header">
+                    <h2>Your Information</h2>
+                    <p class="panel-subtitle">Please enter accurate details for precise telemetry.</p>
+                </div>
+                
+                <form id="bmiForm" novalidate>
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label for="name">Full Name</label>
+                            <div class="input-wrapper">
+                                <span class="input-icon">👤</span>
+                                <input type="text" id="name" required placeholder="John Doe">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-row split">
+                        <div class="input-group">
+                            <label for="age">Age</label>
+                            <div class="input-wrapper">
+                                <span class="input-icon">🎂</span>
+                                <input type="number" id="age" min="1" max="120" required placeholder="21">
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label for="sex">Sex</label>
+                            <div class="input-wrapper">
+                                <span class="input-icon">🧬</span>
+                                <select id="sex" required>
+                                    <option value="">Select</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Male">Male</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-row split">
+                        <div class="input-group">
+                            <label for="weight">Weight (kg)</label>
+                            <div class="input-wrapper">
+                                <span class="input-icon">⚖️</span>
+                                <input type="number" id="weight" min="1" step="0.1" required placeholder="65">
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label for="height">Height (cm)</label>
+                            <div class="input-wrapper">
+                                <span class="input-icon">📏</span>
+                                <input type="number" id="height" min="1" step="0.1" required placeholder="170">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button type="submit" id="submitBtn">
+                            <span>Check My BMI</span>
+                            <span class="btn-arrow">&rarr;</span>
+                        </button>
+                        <button type="reset" id="resetBtn">Reset</button>
+                    </div>
+                </form>
+            </section>
+
+            <section class="meter-panel">
+                <!-- Restored & Perfected Stethoscope Pulsing Prompt -->
+                <div id="meterPrompt" class="meter-prompt">
+                    <div class="pulse-box">
+                        <div class="pulse-ring"></div>
+                        <div class="pulse-ring-delayed"></div>
+                        <span class="prompt-icon">🩺</span>
+                    </div>
+                    <h3>Awaiting Telemetry</h3>
+                    <p>Enter your parameters on the left pane to generate your real-time wellness evaluation index.</p>
+                </div>
+
+                <div id="meterDisplay" class="meter-display hidden">
+                    <div class="assessment-header">
+                        <h3 id="resultName">Assessment Log</h3>
+                        <div id="bmiScore" class="bmi-score">0.0</div>
+                        <div id="categoryBadge" class="category-badge">Normal</div>
+                    </div>
+
+                    <div class="gauge-container">
+                        <div class="gauge-track">
+                            <div class="gauge-segment underweight"></div>
+                            <div class="gauge-segment normal"></div>
+                            <div class="gauge-segment overweight"></div>
+                            <div class="gauge-segment obese"></div>
+                            <div id="gaugePointer" class="gauge-pointer">
+                                <div class="pointer-core"></div>
+                            </div>
+                        </div>
+                        <div class="gauge-labels">
+                            <span class="label-box"><strong>&lt; 18.5</strong> Under</span>
+                            <span class="label-box"><strong>18.5 - 25</strong> Healthy</span>
+                            <span class="label-box"><strong>25 - 30</strong> Over</span>
+                        </div>
+                    </div>
+
+                    <div class="recommendation-card">
+                        <span class="card-quote">“</span>
+                        <p id="recommendationText" class="recommendation-text"></p>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <section class="info-grid-section">
+            <div class="section-heading">
+                <h2>Clinical Reference Indexes</h2>
+                <p>How your results are mapped to institutional wellness frameworks</p>
+            </div>
+            <div class="cards-grid">
+                <div class="info-card">
+                    <div class="card-badge green">Healthy</div>
+                    <h3>Balanced Range</h3>
+                    <p>A BMI reading between 18.5 and 24.9 indicates healthy weight proportions relative to height, minimizing risks of cardiovascular stressors.</p>
+                </div>
+                <div class="info-card">
+                    <div class="card-badge orange">Varied</div>
+                    <h3>Weight Variances</h3>
+                    <p>Readings outside typical thresholds serve as a supportive private baseline tool to evaluate macro-nutrient targets and adjustments.</p>
+                </div>
+                <div class="info-card">
+                    <div class="card-badge blue">Framework</div>
+                    <h3>Holistic Health</h3>
+                    <p>BMI is a baseline metric that doesn't isolate muscle mass from adiposity. Use these outputs alongside broader clinical telemetry.</p>
+                </div>
+            </div>
+        </section>
+
+        <div id="statusAlert" class="status-alert hidden"></div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Nicko Albert B. Dela Cruz &bull; Secure Wellness Interface Platform</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
